@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-// Get CSRF token from cookie
 const getCSRFToken = () => {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -29,8 +28,7 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const csrfToken = getCSRFToken();
-    axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+    axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken();
   }, []);
 
   const handleChange = (e) => {
