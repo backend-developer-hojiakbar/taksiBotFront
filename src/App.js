@@ -125,7 +125,7 @@ function App() {
             type="submit"
             className="button"
           >
-            Submit
+            Yuborish
           </button>
         </form>
         {message && <p className="message">{message}</p>}
