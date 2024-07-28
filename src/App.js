@@ -82,11 +82,11 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1 className="title">Welcome to the Telegram Web App</h1>
+        <h1 className="title">Farovon Taxining Haydovchilar Bo'limiga Xush Kelibsiz!</h1>
         {!submitted ? (
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="label">First Name:</label>
+              <label className="label">Ism:</label>
               <input
                 type="text"
                 name="first_name"
@@ -97,7 +97,7 @@ function App() {
               />
             </div>
             <div className="mb-4">
-              <label className="label">Last Name:</label>
+              <label className="label">Familya:</label>
               <input
                 type="text"
                 name="last_name"
@@ -108,7 +108,7 @@ function App() {
               />
             </div>
             <div className="mb-4">
-              <label className="label">Phone Number:</label>
+              <label className="label">Telefon raqam:</label>
               <input
                 type="text"
                 name="phone_number"
@@ -119,7 +119,7 @@ function App() {
               />
             </div>
             <div className="mb-4">
-              <label className="label">Passport Photo:</label>
+              <label className="label">Passport Rasmni yuklang:</label>
               <input
                 type="file"
                 name="passport_photo"
@@ -129,7 +129,7 @@ function App() {
               />
             </div>
             <div className="mb-4">
-              <label className="label">Driver's License Photo:</label>
+              <label className="label">Prava Rasmni yuklang:</label>
               <input
                 type="file"
                 name="prava_photo"
@@ -148,7 +148,7 @@ function App() {
         ) : (
           <>
             <p className="message">{message}</p>
-            <button onClick={handleCheck} className="button">Check</button>
+            <button onClick={() => window.location.href = 'https://t.me/taxi123453_bot'} className="button">Qaytish</button>
           </>
         )}
         {isActive && <ActionButtons />}
