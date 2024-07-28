@@ -10,7 +10,7 @@ const getCSRFToken = () => {
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
       if (cookie.substring(0, 'csrftoken'.length + 1) === 'csrftoken=') {
-        cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+        cookieValue = decodeURIComponent(cookie.substring('csrftoken='.length + 1));
         break;
       }
     }
@@ -52,7 +52,7 @@ function App() {
     data.append('prava_photo', formData.prava_photo);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/users/create-profile/', data, {
+      const response = await axios.post('http://192.168.1.100:8000/users/create-profile/', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -127,7 +127,7 @@ function App() {
             type="submit"
             className="button"
           >
-            Submit
+            Submitlar
           </button>
         </form>
         {message && <p className="message">{message}</p>}
