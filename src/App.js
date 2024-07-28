@@ -52,7 +52,7 @@ function App() {
     data.append('prava_photo', formData.prava_photo);
 
     try {
-      const response = await axios.post('http://192.168.1.100:8000/users/create-profile/', data, {
+      const response = await axios.post('http://127.0.0.1:8000/users/create-profile/', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
