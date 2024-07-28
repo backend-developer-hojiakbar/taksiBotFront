@@ -60,7 +60,7 @@ function App() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      setMessage('Admins will check you. Please re-enter the bot after 5 minutes.');
+      setMessage("Ro'yhatdan o'tganingiz uchun rahmat");
       setSubmitted(true);
       console.log(response.data);
     } catch (error) {
