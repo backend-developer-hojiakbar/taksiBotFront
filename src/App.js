@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import ActionButtons from './ActionButtons';
 
 const getCSRFToken = () => {
   let cookieValue = null;
@@ -26,6 +27,8 @@ function App() {
     prava_photo: null
   });
   const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken();
@@ -56,6 +59,7 @@ function App() {
         }
       });
       setMessage('Admins will check you. Please re-enter the bot after 5 minutes.');
+      setSubmitted(true);
       console.log(response.data);
     } catch (error) {
       console.error('Error submitting the form:', error.response ? error.response.data : error.message);
@@ -63,72 +67,91 @@ function App() {
     }
   };
 
+  const handleCheck = async () => {
+    try {
+      const response = await axios.get('https://taksibot.pythonanywhere.com/users/check-active/', {
+        params: { phone_number: formData.phone_number }
+      });
+      setIsActive(response.data.is_active);
+    } catch (error) {
+      console.error('Error checking profile status:', error.response ? error.response.data : error.message);
+      setMessage('There was an error checking your profile status. Please try again later.');
+    }
+  };
+
   return (
     <div className="App">
       <div className="container">
         <h1 className="title">Welcome to the Telegram Web App</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="label">First Name:</label>
-            <input
-              type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-              required
-              className="input"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="label">Last Name:</label>
-            <input
-              type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-              required
-              className="input"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="label">Phone Number:</label>
-            <input
-              type="text"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              required
-              className="input"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="label">Passport Photo:</label>
-            <input
-              type="file"
-              name="passport_photo"
-              onChange={handleChange}
-              required
-              className="input"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="label">Driver's License Photo:</label>
-            <input
-              type="file"
-              name="prava_photo"
-              onChange={handleChange}
-              required
-              className="input"
-            />
-          </div>
-          <button
-            type="submit"
-            className="button"
-          >
-            Yuborish
-          </button>
-        </form>
-        {message && <p className="message">{message}</p>}
+        {!submitted ? (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="label">First Name:</label>
+              <input
+                type="text"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="label">Last Name:</label>
+              <input
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="label">Phone Number:</label>
+              <input
+                type="text"
+                name="phone_number"
+                value={formData.phone_number}
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="label">Passport Photo:</label>
+              <input
+                type="file"
+                name="passport_photo"
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="label">Driver's License Photo:</label>
+              <input
+                type="file"
+                name="prava_photo"
+                onChange={handleChange}
+                required
+                className="input"
+              />
+            </div>
+            <button
+              type="submit"
+              className="button"
+            >
+              Yuborish
+            </button>
+          </form>
+        ) : (
+          <>
+            <p className="message">{message}</p>
+            <button onClick={handleCheck} className="button">Check</button>
+          </>
+        )}
+        {isActive && <ActionButtons />}
       </div>
     </div>
   );
