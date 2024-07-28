@@ -127,7 +127,7 @@ function App() {
             type="submit"
             className="button"
           >
-            Submitlar
+            Submit
           </button>
         </form>
         {message && <p className="message">{message}</p>}
