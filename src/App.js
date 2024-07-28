@@ -29,6 +29,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken();
@@ -45,6 +46,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = new FormData();
     data.append('first_name', formData.first_name);
     data.append('last_name', formData.last_name);
@@ -64,6 +66,8 @@ function App() {
     } catch (error) {
       console.error('Error submitting the form:', error.response ? error.response.data : error.message);
       setMessage('There was an error submitting the form. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -141,8 +145,15 @@ function App() {
             <button
               type="submit"
               className="button"
+              disabled={loading}
             >
-              Yuborish
+              {loading ? (
+                <>
+                  <span className="spinner"></span> Kuting...
+                </>
+              ) : (
+                'Yuborish'
+              )}
             </button>
           </form>
         ) : (
