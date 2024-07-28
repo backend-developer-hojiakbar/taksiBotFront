@@ -1,0 +1,105 @@
+/* src/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for your application */
+.App {
+  @apply min-h-screen bg-gray-100 flex items-center justify-center;
+}
+
+.container {
+  @apply bg-white p-8 rounded-lg shadow-md w-full max-w-md;
+}
+
+.title {
+  @apply text-2xl font-bold mb-6 text-center;
+}
+
+.label {
+  @apply block text-gray-700;
+}
+
+.input {
+  @apply mt-1 p-2 w-full border rounded-md;
+}
+
+.button {
+  @apply w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600;
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 600px;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.label {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+}
+
+.button {
+  background-color: #6200ea;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3700b3;
+}
+
+.message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1em;
+}
